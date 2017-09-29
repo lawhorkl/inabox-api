@@ -2,11 +2,23 @@ class UsageController < ApplicationController
   
   def index
     usage_stats = Vmstat.snapshot
-    render json: usage_stats, status: :ok
+    free_memory = usage_stats.memory.free_bytes
+    available_memory = usage_stats.memory.available_bytes
+    res = {
+      :ram_stats => {
+        :ram_capacity => available_memory,
+        :ram_free => free_memory
+      },
+      :cpu_stats => {
+        :cpu_cores => usage_stats.cpus.length
+      },
+      :disk_stats => {}
+    }
+    render json: res, status: :ok
   end
 
   def memory
-    memory_stats = Vmstat.snapshot.memory
+    # memory_stats = Vmstat.snapshft.memory
     render json: memory_stats, status: :ok
   end
 
