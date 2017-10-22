@@ -3,10 +3,10 @@ class UsageController < ApplicationController
   def index
     usage_stats = Vmstat.snapshot
     free_memory = usage_stats.memory.free_bytes
-    available_memory = usage_stats.memory.available_bytes
+    ram_capacity = usage_stats.memory.total_bytes
     res = {
       :ram_stats => {
-        :ram_capacity => available_memory,
+        :ram_capacity => ram_capacity,
         :ram_free => free_memory
       },
       :cpu_stats => {
