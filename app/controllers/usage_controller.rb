@@ -5,14 +5,9 @@ class UsageController < ApplicationController
     free_memory = usage_stats.memory.free_bytes
     ram_capacity = usage_stats.memory.total_bytes
     res = {
-      :ram_stats => {
-        :ram_capacity => ram_capacity,
-        :ram_free => free_memory
-      },
-      :cpu_stats => {
-        :cpu_cores => usage_stats.cpus.length
-      },
-      :disk_stats => {}
+      :ram_capacity => ram_capacity,
+      :free_ram => free_memory,
+      :cores_available => usage_stats.cpus.length
     }
     render json: res, status: :ok
   end
