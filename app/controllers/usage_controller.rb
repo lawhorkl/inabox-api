@@ -7,7 +7,9 @@ class UsageController < ApplicationController
     res = {
       :ram_capacity => ram_capacity,
       :free_ram => free_memory,
-      :cores_available => usage_stats.cpus.length
+      :current_ram_usage => ram_capacity - free_memory,
+      :cores_available => usage_stats.cpus.length,
+      :active => true
     }
     render json: res, status: :ok
   end
