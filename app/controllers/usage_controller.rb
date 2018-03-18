@@ -21,7 +21,6 @@ class UsageController < ApplicationController
       :free_storage => free_storage,
       :block_size => block_size,
       :mount_point => mount_point,
-      :active => true
     }
     render json: res, status: :ok
   end
